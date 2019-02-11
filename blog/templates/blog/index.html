@@ -3,8 +3,15 @@
 <h1>Mindfoul blog</h1>
 
 {% for post in posts %}
-<h3>{{ post.title }}</h3>
-<p>{{ post.content }}</p>
-<small>By {{ post.author}} on {{ post.created_at }}</small>
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ post.author }}</a>
+      <small class="text-muted">{{ post.created_at }}</small>
+    </div>
+    <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+    <p class="article-content">{{ post.content }}</p>
+  </div>
+</article>
 {% endfor %}
 {% endblock content %}
