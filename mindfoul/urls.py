@@ -46,6 +46,7 @@ urlpatterns = [
 
     # user routes
     path('profile/', user_views.profile, name='profile'),
+    path('weather/', include('weather.urls')),
 ]
 
 if settings.DEBUG:

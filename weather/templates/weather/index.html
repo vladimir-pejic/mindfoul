@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-9 form-group">
+                <input class="form-control" type="text" placeholder="City Name">
+            </div>
+            <div class="col-md-3 form-group">
+                <button class="btn btn-outline-info btn-block">
+                    Add City
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        {% for weather in weather_data %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title"><img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" style="height: 60px; width: 60px"></span>
+                        <h5 class="card-subtitle mb-2 text-muted">{{ weather.city }}</h5>
+                        <h2>{{ weather.temperature }}° C</h2>
+                        <p class="card-text">{{ weather.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
