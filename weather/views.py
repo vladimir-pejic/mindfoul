@@ -22,6 +22,7 @@ def index(request):
             obj = form.save(commit=False)
             obj.author = request.user
             obj.save()
+            return redirect('weather')
         else:
             messages.error(request, f'The city cannot be found!')
             return redirect('weather')
