@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views
+from .views import index, CityDeleteView
 
 
 
 urlpatterns = [
-    path('', views.index)
+    path('', index, name='weather'),
+    path('/<int:pk>/delete', CityDeleteView.as_view(), name='weather.delete'),
 ]

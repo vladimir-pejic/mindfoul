@@ -2,12 +2,13 @@
 {% block content %}
 
     <form method="POST">
+        {% csrf_token %}
         <div class="row">
             <div class="col-md-9 form-group">
-                <input class="form-control" type="text" placeholder="City Name">
+                {{ form.name }}
             </div>
             <div class="col-md-3 form-group">
-                <button class="btn btn-outline-info btn-block">
+                <button type="submit" class="btn btn-outline-info btn-block">
                     Add City
                 </button>
             </div>
@@ -16,10 +17,11 @@
 
     <div class="row">
         {% for weather in weather_data %}
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <span class="card-title"><img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" style="height: 60px; width: 60px"></span>
+                        <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" style="height: 60px; width: 60px">
+                        <a href="{% url 'weather.delete' weather.city_id %}"><span class="badge badge-danger float-right" style="font-weight: bold;">X</span></a>
                         <h5 class="card-subtitle mb-2 text-muted">{{ weather.city }}</h5>
                         <h2>{{ weather.temperature }}° C</h2>
                         <p class="card-text">{{ weather.description }}</p>

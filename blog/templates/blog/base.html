@@ -9,6 +9,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
 
@@ -53,28 +55,40 @@
     </header>
 
     <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-            {% block content %}{% endblock %}
-        </div>
-        <div class="col-md-4">
-          <div class="content-section">
-            <h3>Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Announcements</li>
-                <li class="list-group-item list-group-item-light">Calendars</li>
-                <li class="list-group-item list-group-item-light">etc</li>
-              </ul>
-            </p>
+      <div class="row align-center">
+          <div class="col-md-8">
+              {% if messages %}
+                  {% for message in messages %}
+                      {% if message.tags == 'error' %}
+                          <div class="alert alert-danger">{{ message }}</div>
+                      {% else %}
+                          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                      {% endif %}
+                  {% endfor %}
+              {% endif %}
+              {% block content %}{% endblock %}
           </div>
-        </div>
+          {% if user.is_authenticated %}
+          <div class="col-md-4">
+              <div class="content-section">
+                  <h3>{{ user.username }}</h3>
+                  <p class='text-muted'>{{ user.email }}
+                      <ul class="list-group">
+                        <li class="list-group-item list-group-item-light">
+                            <a href="{% url 'user.posts' user.username %}">Posts</a>
+                        </li>
+                        <li class="list-group-item list-group-item-light">
+                            <a href="{% url 'profile' %}">Settings</a>
+                        </li>
+                        <li class="list-group-item list-group-item-light">
+                            <a href="{% url 'weather' %}">Weather</a>
+                        </li>
+                        <li class="list-group-item list-group-item-light">Calendar</li>
+                      </ul>
+                  </p>
+              </div>
+          </div>
+          {% endif %}
       </div>
     </main>
 

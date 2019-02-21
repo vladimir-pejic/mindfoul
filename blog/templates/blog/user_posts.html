@@ -1,7 +1,10 @@
 {% extends "blog/base.html" %}
 {% block content %}
 
-    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+    <h2 class="mb-3">
+        Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})
+        <span class="float-right"><a href="{% url 'post.create' %}" class="btn btn-outline-info"><i class="fa fa-plus-square-o"></i> Create New</a> </span>
+    </h2>
 
     {% for post in posts %}
     <article class="media content-section">
