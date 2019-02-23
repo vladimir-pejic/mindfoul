@@ -1,0 +1,5 @@
+python -m pip install django-crispy-forms
+python -m pip install python-dotenv
+python -m pip install tweepy
+python -m pip install textblob
+python -m textblob.download_corpora

@@ -47,6 +47,7 @@ urlpatterns = [
     # user routes
     path('profile/', user_views.profile, name='profile'),
     path('weather/', include('weather.urls')),
+    path('tweetalize/', include('tweetalize.urls')),
 ]
 
 if settings.DEBUG:

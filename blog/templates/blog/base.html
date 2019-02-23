@@ -49,6 +49,7 @@
                     <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 {% endif %}
             </div>
+
           </div>
         </div>
       </nav>
@@ -83,10 +84,22 @@
                         <li class="list-group-item list-group-item-light">
                             <a href="{% url 'weather' %}">Weather</a>
                         </li>
-                        <li class="list-group-item list-group-item-light">Calendar</li>
+                        <li class="list-group-item list-group-item-light">
+                            <a href="{% url 'tweetalize' %}">Tweetalizer</a>
+                        </li>
                       </ul>
                   </p>
               </div>
+              {% if tweets %}
+                  <div class="card">
+                        <div class="card-header">Your tweets</div>
+                        <div class="card-body" style="height: 450px; overflow: auto">
+                            {% for tweet in tweets %}
+                                <p>{{ tweet.text }}</p>
+                            {% endfor %}
+                        </div>
+                  </div>
+              {% endif %}
           </div>
           {% endif %}
       </div>

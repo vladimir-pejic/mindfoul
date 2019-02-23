@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+    <form method="POST" action="{% url 'tweetalize' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-9 form-group">
+                <input type="text" name="word" class="form-control" placeholder="Find a term">
+            </div>
+            <div class="col-md-3 form-group">
+                <button type="submit" class="btn btn-outline-info btn-block">
+                    Fetch!
+                </button>
+            </div>
+        </div>
+    </form>
+
+    {% if stats %}
+    <div class="row">
+        {% for stat in stats %}
+            <p>{{ stat }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+{% endblock content %}
